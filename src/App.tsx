@@ -1,36 +1,15 @@
-import {useState} from 'react';
+import LoginControlled from "./components/LoginControlled";
+import RegisterControlled from "./components/RegisterControlled";
 
 function App() {
-
-  const [data, setData] = useState({
-    username: "",
-    password: ""
-  });
-
-  const handleForm = (event : any) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    setData(data => ({
-      ...data,
-      [name] : value
-    }))
-  }
-
   return (
     <div>
-      <h1>Login</h1>
-      <form>
-        <label>username</label>
-        <input onChange={handleForm} type="text" name="username" value={data.username}/>
-        <label>password</label>
-        <input onChange={handleForm} type="text" name="password" value={data.password}/>
-        <button type="button" onClick={()=>{
-          console.log(data);
-        }}>Login</button>
-      </form>
+      <LoginControlled />
+      <hr/>
+      <RegisterControlled />
     </div>
-  );
+
+  )
 }
 
 export default App;
