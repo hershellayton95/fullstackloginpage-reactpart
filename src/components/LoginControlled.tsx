@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button, Checkbox, Container, FormControlLabel, FormGroup, Typography } from '@mui/material';
+import { Button, Checkbox, Container, FormControlLabel, FormGroup, Typography, FormHelperText } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function LoginControlled() {
 
@@ -18,6 +19,10 @@ export default function LoginControlled() {
             ...d,
             [name]: value
         }))
+    }
+
+    const hadleClick = () => {
+        console.log(form);
     }
 
     return (
@@ -40,7 +45,8 @@ export default function LoginControlled() {
                 </FormGroup>
             </Box>
             <Box>
-                <Button variant='contained' fullWidth size='large' type='button'>Login</Button>
+                <Button variant='contained' fullWidth size='large' type='button' onClick={hadleClick}>Login</Button>
+                <FormHelperText>Non sei ancora registrato? <Link to="/user/signin">Sign in!</Link></FormHelperText>
             </Box>
         </Container>
     );
