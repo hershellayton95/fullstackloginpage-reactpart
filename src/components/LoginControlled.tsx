@@ -2,14 +2,18 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button, Checkbox, Container, FormControlLabel, FormGroup, Typography, FormHelperText } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginControlled() {
+
 
     const [form, setForm] = useState({
         username: "Filippo",
         password: "password1"
     });
+
+
+    const navigate = useNavigate();
 
     const hadlerChange = (event: any) => {
         const name = event.target.name;
@@ -22,7 +26,7 @@ export default function LoginControlled() {
     }
 
     const hadleClick = () => {
-        console.log(form);
+        navigate("/user/profile");
     }
 
     return (
