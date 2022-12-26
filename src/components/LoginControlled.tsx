@@ -1,51 +1,47 @@
-import { useState } from "react";
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button, Checkbox, Container, FormControlLabel, FormGroup, Typography } from '@mui/material';
 
-function LoginControlled() {
+export default function LoginControlled() {
 
-    async function provaFetch(data : {username : string, password: string}) {
-        const req = await fetch(`http://localhost:3001/users/login?username=${data.username}&password=${data.password}`);
-
-        const res = await req.json();
-
-        console.log(res);
-    }
-
-
-
-    const [data, setData] = useState({
-    username: "Filippo",
-    password: "password",
+    const [form, setForm] = useState({
+        username: "Filippo",
+        password: "password1"
     });
 
-    const handleForm = (event: any) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const hadlerChange = (event: any) => {
+        const name = event.target.name;
+        const value = event.target.value;
 
-    setData(data => ({
-        ...data,
-        [name]: value,
-    }));
-    };
-
-    const handleClick = () => {
-    console.log(data);
-    provaFetch(data);
+        setForm(d =>({
+            ...d,
+            [name]: value
+        }))
     }
 
     return (
-    <div>
-        <h1>Login</h1>
-        <form>
-        <label>username</label>
-        <input onChange={handleForm} type="text" name="username" value={data.username}
-        />
-        <label>password</label>
-        <input onChange={handleForm} type="password" name="password" value={data.password}
-        />
-        <button type="button" onClick={handleClick}> Login </button>
-        </form>
-    </div>
+        <Container maxWidth="sm">
+            <Box>
+                <Typography variant='h3' component="div">Login</Typography>
+            </Box>
+            <Box
+            component="form"
+            sx={{
+                '& .MuiTextField-root': { m: 1 },
+            }}
+            noValidate
+            autoComplete="off"
+            >
+                <FormGroup>
+                <TextField label="Username" variant="standard" type={"text"} name={"username"} onChange={hadlerChange} value={form.username}/>
+                <TextField label="Password" variant="standard" type={"password"}  name={"password"} onChange={hadlerChange} value={form.password}/>
+                <FormControlLabel control={<Checkbox size='small' />} label="Resta Connesso" disabled sx={{m:0.1}}/>
+                </FormGroup>
+            </Box>
+            <Box>
+                <Button variant='contained' fullWidth size='large' type='button'>Login</Button>
+            </Box>
+        </Container>
     );
 }
-
-export default LoginControlled;
